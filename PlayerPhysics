@@ -1,0 +1,78 @@
+using UnityEngine;
+using System.Collections;
+
+public class PlayerPhysics : MonoBehaviour {
+  
+	float timerz = 1;
+	public static bool stage1 = false;
+	
+	
+	void Awake(){
+		TimeLimit.timer = 120;
+		GameObject.Find("GUI").GetComponent<GUI_Restart>().enabled = false;
+		GameObject.Find("GUI").GetComponent<GUI_Layout>().enabled = true;	
+		GameObject.Find("GUI").GetComponent<GUI_QuestList>().enabled = true;
+	}
+	
+	void Update()
+	{
+		
+		if(stage1 == true){
+		Application.LoadLevel("Menu");
+		}
+		
+		Collider[] CollidersOverlapped = Physics.OverlapSphere(transform.position, 1.5f);
+		
+		foreach(Collider objectCollided in CollidersOverlapped)
+		{
+			if (objectCollided.transform.gameObject.tag == "LOOT")
+			{
+				GameObject.Find("GUI").GetComponent<GUI_Layout>().enabled = true;
+				ItemInformation(objectCollided.transform.gameObject.name);
+				Debug.Log(objectCollided.transform.gameObject.name);
+			}else{
+				//GameObject.Find("GUI").GetComponent<GUI_Layout>().enabled = false;	
+			}
+				
+			
+		}
+		
+	}
+	
+	void CheckForQUest(){
+		
+		if ( (GUI_QuestList.lbl_Quest1 == "C O M P L E T E D !")&&(GUI_QuestList.lbl_Quest2 == "C O M P L E T E D !")&&(GUI_QuestList.lbl_Quest1 == "C O M P L E T E D !") )
+		{
+		stage1 = true;
+			Debug.Log("stage1 COMPLETED");
+		}
+			
+			
+	}
+	
+	void ItemInformation(string itemName)
+	{
+		switch (itemName)
+		{
+		case "Talaarawan": 
+		GUI_Layout.lbl_ItemName = "Talaarawan ni Dr. Jose Protacio Rizal";
+		GUI_Layout.lbl_ItemInfo = "Si Segunda Katigabak ang unang pag-ibig ni Rizal. Sa gulang na 16 na taon, pagkaraan ng pag-aaral sa Ateneo, nagsimulang umibig si Rizal sa isang dalagang 14 na taong gulang taga-Lipa, Batangas. Ito ang pag-ibig sa unang pagkikita at ito rin ang kauna-unahang pagkabigo sa pag-ibig ni Rizal sapagkat ang dalaga ay nakatakda ng ikasal sa isang Manuel Cruz";
+		break;	
+			
+		case "Kalasag":
+		GUI_Layout.lbl_ItemName = "Kalasag ni Lapu Lapu";
+		GUI_Layout.lbl_ItemInfo = "Si Lapu-lapu ang kauna-unahang pinunong Pilipinong lumaban sa mga mananakop na Kastila. Pinamumunuan ni Magallanes ang unang pangkat ng mga Kastilang nagtangkang sumakop sa kapuluan.";
+		break;
+		
+		case "Itak":
+		GUI_Layout.lbl_ItemName = "Itak ni Andres Bonifacio";
+		GUI_Layout.lbl_ItemInfo = "Si Andres Bonifacio ang nagtatag ng Katipunan. Ang Katipunan ay ang samahan ng mga Katipunero. Ang mga Katipunero ay ang mga Pilipinong lumaban sa mga Kastila sa pamamagitan ng sandata o himagsikan.";
+		break;	
+		
+		default :
+		GUI_Layout.lbl_ItemName = "";
+		GUI_Layout.lbl_ItemInfo = "";
+		break;	
+		}
+	}
+}
