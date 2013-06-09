@@ -1,0 +1,43 @@
+using UnityEngine;
+using System.Collections;
+
+public class GUI_QuestList : MonoBehaviour {
+  
+		public GUISkin customSkin;
+
+		private Rect rectQuestList;
+		public static string lbl_Quest1;
+		public static  string lbl_Quest2;
+		public static  string lbl_Quest3;
+
+	
+	void Start()
+	{
+	
+	rectQuestList = new Rect (0,60,(Screen.width/4),(Screen.height-65) );
+	
+	lbl_Quest1 = "Ang 'TALAARAWAN o diary' ni Dr. Jose Protacio Rizal(ang Pambansang Bayani ng Pilipinas) na kung saan nakalahad ang kanyang unang Pag ibig.";	
+	lbl_Quest2 = "Ang 'KALASAG' ni Lapu Lapu, Ayon sa mga mananalaysay noong unang panahon ang kalasag ni Lapu Lapu ay kinuha at tinago ng mga dayuhan sa Intramuros.";	
+	lbl_Quest3 = "Ang 'ITAK' ni Andres Bonifacio, Ayon sa mga istorya kay Andres Bonifacio may mga maraming haka-haka tungkol sa kanyang kamatayan.";
+	
+	}
+	void OnGUI()
+	{
+		GUI.skin = customSkin;
+		
+		GUI.Window (0, rectQuestList, windowQuest , "Hanapin ang mga ss.:");
+		
+	}	
+	
+	
+		
+	void windowQuest(int windowID)
+	{
+		int xh = ((Screen.height/3)-20);
+		int xw = ((Screen.width/4)-10);
+		GUI.Label(new Rect(5,20,xw,xh) , lbl_Quest1 , "box");
+		GUI.Label(new Rect(5,(20+(xh*1)),xw,xh) , lbl_Quest2 , "box");
+		GUI.Label(new Rect(5,(20+(xh*2)),xw,xh) , lbl_Quest3 , "box");
+	}
+	
+}
