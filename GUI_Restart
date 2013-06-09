@@ -1,0 +1,51 @@
+using UnityEngine;
+using System.Collections;
+
+public class GUI_Restart : MonoBehaviour {
+  
+	
+		private int w = (Screen.width/4);
+		private int h = (Screen.height/3);
+		private int x = ((Screen.width/2) - (Screen.width/8));
+		private int y = ((Screen.height/2) - (Screen.height/6));
+		private Rect rectWindowInfo;
+	
+	public static bool doRestart = false;
+	
+		public static bool restart= false;
+		public static bool backtomenu= false;
+	
+	void Start () {
+	rectWindowInfo = new Rect(x,y,w,h);
+	GameObject.Find("GUI").GetComponent<GUI_Layout>().enabled = false;	
+	GameObject.Find("GUI").GetComponent<GUI_QuestList>().enabled = false;
+	}
+	
+	void OnGUI() {
+		
+		GUI.Window (2, rectWindowInfo, windowQuest , "M E N U");
+		
+		
+	}
+	
+	
+	void windowQuest(int windowID)
+	{
+		restart = GUI.Button( new Rect(5,30,(w-10),25) , "Restart Game" );
+		backtomenu = GUI.Button( new Rect(5,60,(w-10),25) , "Back to Menu" );
+		
+		
+		if (restart){
+			 doRestart = true;
+		}
+		
+	}
+	
+	
+	void Update(){
+		if (doRestart){
+			Application.LoadLevel (Application.loadedLevelName);
+		}
+	}
+	
+}
