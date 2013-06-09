@@ -1,0 +1,53 @@
+using UnityEngine;
+using System.Collections;
+
+public class JeepPhysics : MonoBehaviour {
+  
+	
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+		
+		Collider[] CollidersOverlapped = Physics.OverlapSphere(transform.position, 1.5f);
+		
+		foreach(Collider objectCollided in CollidersOverlapped)
+		{
+			if (objectCollided.transform.gameObject.tag == "OBSTACLE")
+			{
+				
+			}else{
+				//GameObject.Find("GUI").GetComponent<GUI_Layout>().enabled = false;	
+			}
+				
+			
+		}
+		
+	}
+	
+	
+	void OnCollisionEnter(Collision collision) {
+		if(collision.gameObject.tag == "OBSTACLE")
+        {
+		GUI_Stats.life -=1;
+        }
+	}
+	
+	   void OnTriggerEnter (Collider trigger) {
+        if(trigger.gameObject.tag == "FALLOUT"){
+		GUI_Stats.life = 0;	
+		}
+        if(trigger.gameObject.tag == "GAS"){
+		GUI_Stats.life += 1;	
+		Destroy(trigger.gameObject);
+		}
+		
+		
+		
+    }
+		
+}
