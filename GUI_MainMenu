@@ -1,0 +1,59 @@
+using UnityEngine;
+using System.Collections;
+
+public class GUI_MainMenu : MonoBehaviour {
+  
+	public GUISkin customSkin;
+	
+	public Texture screen;
+	
+	private int w  = (Screen.width);
+	private int h = (Screen.height);
+	private int x = 0;
+	private int y = 0;
+	
+	private bool btn1, btn2, btn3, btn4;
+	
+	public Texture txturebtn1, txturebtn2, txturebtn3, txturebtn4;
+	
+	
+	void OnGUI()
+	{
+		GUI.skin = customSkin;
+		GUI.DrawTexture(new Rect(0,0,Screen.width ,Screen.height) , screen);
+		
+		//Rect rectMaximizeRight = new Rect(x , y, w , h);
+		//GUI.Window (0, rectMaximizeRight, MaximizedRight, "M E N U");
+		
+		int menuButtonX = (10);
+		int menuButtonY = (10);
+		int menuButtonH1 = (h/2);
+		int menuButtonW = menuButtonH1;
+		
+		btn1 = GUI.Button(new Rect(menuButtonX,menuButtonY,menuButtonW,menuButtonH1) , txturebtn1);
+		btn2 = GUI.Button(new Rect((menuButtonX+menuButtonW+5),menuButtonY,menuButtonW,menuButtonH1) , txturebtn2);
+		
+		btn3 = GUI.Button(new Rect(menuButtonX,					(/*add space*/5+menuButtonY+(menuButtonH1*1)),menuButtonW,menuButtonH1) , txturebtn4);
+		btn4 = GUI.Button(new Rect((menuButtonX+menuButtonW+5),	(/*add space*/5+menuButtonY+(menuButtonH1*1)),menuButtonW,menuButtonH1) , txturebtn3);
+		
+		if (btn1){
+		Application.LoadLevel("Story1");	
+		}else if (btn2){
+		Application.LoadLevel("Story2");		
+		}else if (btn3){
+		Application.LoadLevel("Story4");		
+		}else if (btn4){
+		Application.LoadLevel("Story3");		
+		}
+		
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+}
