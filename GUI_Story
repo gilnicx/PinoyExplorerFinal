@@ -1,0 +1,58 @@
+using UnityEngine;
+using System.Collections;
+
+public class GUI_Story : MonoBehaviour {
+  
+	public GUISkin customSkin;
+	public Texture Story1,Story2,Story3,Story4;
+	public static string label1 = "Ako si Juan isa akong Pilipino at nais kong mag lakbay aral sa mga piling lugar sa Pilipinas upang tuklasin ang ilang historya tungkol sa aking bayang sinilangan at ang unti unting pag unlad nang aking bayan.. Tara na at samahan mo ako sa aking pag lalakbay..";
+	public static string label2 = "Maraming salamat saiyo kaibigan dahil sa iyong tulong natapos ko din ang aking paghahanap sa mga nawawalang importanteng bagay ng ating mga bayani. Halika at muli mo akong samahan sa aking paglalakbay sa  taft avenue gamit ang aking sasakyan na Jeepney";
+	public static string label3 = "Maraming salamat muli saiyong tulong kaibigan at nakarating ako ngayon sa Ayala. Ngunit lubhang nakakapangamba ang lugar na ito dahil sa makabagong teknolohiya ang lugar na ito ay unting unti ng nagbabago tulad nalang ng pag dami ng mga malalaki istraktura at mga ibat ibang uri ng mga gusali sa lugar dahilan na nawala na rin ang mga dating puno na nagbibigay ng maaliwalas na hangin sa mga taong naninirahan dito.";
+	public static string label4 = "Maraming salamat saiyo kaibigan dahil sa iyong tulong natapos ko din ang aking paghahanap sa mga nawawalang importanteng bagay ng ating mga bayani";
+	
+	
+	public bool story1,story2,story3,story4;
+	
+	void OnGUI()
+	{
+		
+		
+		
+		GUI.skin = customSkin;
+		
+	int w = ((Screen.width - Screen.width/3)-20);
+	int h = (Screen.height-20);
+	int x = (Screen.width/3)+10;
+	int y = 10;
+	Rect rectt = new Rect(x,y,w,h);
+		
+		
+		if(story1){
+		GUI.DrawTexture(new Rect (0,0,Screen.width , Screen.height) , Story1);
+		GUI.Label (rectt , label1 , "box");
+			if (GUI.Button (new Rect (x+50, Screen.height-100, w-100, 50) , "maging isang PINOY EXPLORER!"))
+			Application.LoadLevel("AngelHack");	
+		}
+		if(story2){
+		GUI.DrawTexture(new Rect (0,0,Screen.width , Screen.height) , Story2);
+		GUI.Label (rectt , label2 , "box");
+			if (GUI.Button (new Rect (x+50, Screen.height-100, w-100, 50) , "maging isang PINOY EXPLORER!"))
+			Application.LoadLevel("Stage2una");	
+		}
+		if(story3){
+		GUI.DrawTexture(new Rect (0,0,Screen.width , Screen.height) , Story3);
+		GUI.Label (rectt , label3 , "box");
+			if (GUI.Button (new Rect (x+50, Screen.height-100, w-100, 50) , "maging isang PINOY EXPLORER!"))
+			Application.LoadLevel("Event");	
+		}
+		
+		if(story4){
+		GUI.DrawTexture(new Rect (0,0,Screen.width , Screen.height) , Story4);
+		GUI.Label (rectt , label4 , "box");
+			if (GUI.Button (new Rect (x+50, Screen.height-100, w-100, 50) , "maging isang PINOY EXPLORER!"))
+			Application.LoadLevel("Stage2");	
+		}
+		
+	}
+	
+}
