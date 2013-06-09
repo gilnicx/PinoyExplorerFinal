@@ -1,0 +1,42 @@
+using UnityEngine;
+using System.Collections;
+
+public class GUI_Layout : MonoBehaviour {
+  
+		public GUISkin customSkin;
+		private int w = (Screen.width/3);
+		private int h = (Screen.height/2);
+		private int x = (Screen.width - (Screen.width/3));
+		private int y = 0;
+		private Rect rectWindowInfo;
+
+	
+		public static string lbl_ItemName = "";
+		public static string lbl_ItemInfo = "";
+	
+	void Start()
+	{
+	rectWindowInfo = new Rect (x,y,w,h);	
+	}
+	void OnGUI()
+	{
+		GUI.skin = customSkin;
+		GUI.Window (1, rectWindowInfo, windowInfo , "Item Information");
+		GUI.Label(new Rect(x,(h+15),(w),(25)), "Tap the Item to Collect" , "box");
+		GUI.Label(new Rect(x,(h+15),(w),(25)), "Tap the Item to Collect" , "box");
+
+	}	
+	
+	void windowInfo(int windowID)
+	{
+		GUI.Label(new Rect(10,30,(w-20),20), lbl_ItemName , "box");
+		GUI.Label(new Rect(10,60,(w-20),(h-75)), lbl_ItemInfo , "box");
+		
+		if (GUI.Button(new Rect(10,200,(w-20),(20)), "Stage 2")){
+			Application.LoadLevel("Stage2");
+		}
+	}
+	
+		
+	
+}
