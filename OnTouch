@@ -1,0 +1,99 @@
+using UnityEngine;
+using System.Collections;
+
+public class OnTouch : MonoBehaviour {
+
+  string	raycastHitTag;
+	private GameObject Player;
+	public static Quaternion newRotation;
+	float timerx = 1;
+	public static bool doRespawn = false;
+	
+	void Start() {
+		Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+	}
+	
+	void OnGUI(){
+		
+
+		
+	}
+
+	
+	void Update () {
+		if (doRespawn){
+			
+			
+			Debug.Log(timerx);
+			timerx -= Time.deltaTime;
+					
+			if (timerx<=0){
+			Player.transform.position = GameObject.Find("Respawn").transform.position;
+				doRespawn = false;
+			}
+		}
+		//
+
+		if (Input.touchCount > 0){ 
+			Ray origin = Camera.main.ScreenPointToRay(Input.touches[0].position);
+			RaycastHit hit;
+	
+	        if (Physics.Raycast(origin, out hit))
+			{
+			
+				raycastHitTag = hit.collider.gameObject.tag;
+				
+				
+			if ( raycastHitTag == "FORWARD" ){
+			GameObject.FindGameObjectWithTag("MESHPLAYER").gameObject.animation.Play("Walk");
+			Player.transform.Translate(Vector3.forward * (Time.deltaTime*8));
+			}else if ( raycastHitTag == "LEFT" ){
+			GameObject.FindGameObjectWithTag("MESHPLAYER").gameObject.animation.Play("Walk");
+			transform.Rotate(Vector3.up *10);
+			//newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y+180, transform.rotation.z);
+			//Player.transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.time * 0.006f);
+			}else if ( raycastHitTag == "RIGHT" ){
+			GameObject.FindGameObjectWithTag("MESHPLAYER").gameObject.animation.Play("Walk");
+			transform.Rotate(Vector3.up *-10);
+			//newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y+360, transform.rotation.z);
+			//Player.transform.rotation = Quaternion.Slerp (transform.rotation, newRotation, Time.time * 0.006f);
+			}else{
+			GameObject.FindGameObjectWithTag("MESHPLAYER").gameObject.animation.Play("Stop");
+			}
+	       	
+				if ( (raycastHitTag == "LOOT")&&(GameObject.Find("GUI").GetComponent<GUI_Layout>().enabled == true)  )
+				{
+					switch (hit.transform.gameObject.name)
+					{
+						case "Talaarawan" : GUI_QuestList.lbl_Quest1 = "C O M P L E T E D !";
+							GUI_Layout.lbl_ItemName = "";
+							GUI_Layout.lbl_ItemInfo = "";
+							
+							doRespawn = true;
+							
+							break;
+						case "Kalasag" : GUI_QuestList.lbl_Quest2 = "C O M P L E T E D !";
+							GUI_Layout.lbl_ItemName = "";
+							GUI_Layout.lbl_ItemInfo = "";
+							break;
+						case "Itak" : GUI_QuestList.lbl_Quest3 = "C O M P L E T E D !";
+							GUI_Layout.lbl_ItemName = "";
+							GUI_Layout.lbl_ItemInfo = "";
+							break;
+					}
+					Debug.Log("LOOOT");
+					Destroy(hit.transform.gameObject);
+			}
+		}
+
+		
+		
+	  
+
+	   
+	    
+	    }
+	
+		
+	}
+}
