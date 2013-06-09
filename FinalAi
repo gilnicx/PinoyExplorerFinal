@@ -1,0 +1,52 @@
+using UnityEngine;
+using System.Collections;
+
+public class FinalAI : MonoBehaviour {
+  
+	float time = 30;
+	bool show = false;
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+
+		
+	if (Input.touchCount > 0){ 
+			Ray origin = Camera.main.ScreenPointToRay(Input.touches[0].position);
+			RaycastHit hit;
+	
+	        if (Physics.Raycast(origin, out hit))
+			{
+			
+				string raycastHitTag = hit.collider.gameObject.tag;
+				
+				
+			if ( raycastHitTag == "AIFINAL" ){	
+			show = true;
+			}
+				
+			}
+		
+	}
+		
+		
+		
+}	
+	void OnGUI()
+		{
+			if (show)
+			{
+			GUI.Label(new Rect( (Screen.width/2)-300,30,600,300 ), "PURCHASE."  );	
+			}
+			
+			
+		}
+	
+
+	
+
+	
+}
